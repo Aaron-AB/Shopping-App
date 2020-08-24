@@ -1,0 +1,41 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Ionic Shopping
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="openCart()">
+        <ion-badge *ngIf="cart.length >0"> {{ cart.length }}</ion-badge>
+        <ion-icon name="cart" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div *ngFor="let cat of items" class="category-block">
+    <ion-row no-padding class="category-banner">
+      <ion-col text-left button tappable (click)="cat.expanded = !cat.expanded" align-self-center>
+        {{ cat.Category }}
+      </ion-col>
+    </ion-row>
+
+    <ion-slides [options]="sliderConfig">
+      <ion-slide *ngFor="let product of cat.Products">
+        <div *ngIf="cat.expanded">
+          <ion-card>
+            <ion-card-title>
+              {{ product.Name }} - ${{ product.Price }}
+            </ion-card-title>
+            <ion-card-content>
+              <img src="https://via.placeholder.com/300x300">
+              <ion-button expand="full" (click)="addToCart(product)">
+                Add to Cart
+              </ion-button>
+            </ion-card-content>
+          </ion-card>>
+        </div>
+      </ion-slide>
+    </ion-slides>
+  </div>
+</ion-content>

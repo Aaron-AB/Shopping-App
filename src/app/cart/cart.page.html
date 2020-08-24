@@ -1,0 +1,21 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons>
+      <ion-back-button defaultHred="/">
+
+      </ion-back-button>
+    </ion-buttons>
+    <ion-title>cart</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item *ngFor="let item of selectedItems" lines="inset">
+      {{ item.count }} x {{ item.name }} - {{ item.price | currency:'TTD':'symbol' }}
+    </ion-item>
+    <ion-item>
+      Total: <span slot="end"> {{ total | currency:'TTD':'symbol'}} </span>
+    </ion-item>
+  </ion-list>
+</ion-content>
