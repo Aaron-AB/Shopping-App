@@ -81,4 +81,12 @@ export class CartService {
     this.cart.push(product);
     //console.log(this.cart);
   }
+
+  calculateTotal(items) {
+    let total = 0;
+    for(var i = 0; i < items.length; i++ ){
+      total += items[i][0].Price * items[i][1];
+    }
+    return total;
+  }
 }

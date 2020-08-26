@@ -12,7 +12,7 @@
 <ion-content>
   <ion-list>
     <ion-item *ngFor="let item of selectedItems" lines="inset">
-      {{ item.count }} x {{ item.name }} - {{ item.price | currency:'TTD':'symbol' }}
+      {{ item[1] }} x {{ item[0].Name }} - {{ item[0].Price | currency:'TTD':'symbol' }}
     </ion-item>
     <ion-item>
       Total: <span slot="end"> {{ total | currency:'TTD':'symbol'}} </span>

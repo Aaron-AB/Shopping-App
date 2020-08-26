@@ -15,20 +15,27 @@ export class CartPage implements OnInit {
 
   ngOnInit() {
 
-    this.items = this.cartService.getCart();
-    console.log(this.items);
-    let selected = {};
-    for (let obj of this.items) {
-      if (selected[obj.id]) {
-        selected[obj.id].count++;
-      } else {
-        selected[obj.name] = {...obj, count: 1};
-      }
+    this.items = this.cartService.getCart();   
+    
+    let counter = {};
+    this.items.forEach(function(obj) {
+      var key = JSON.stringify(obj);
+      counter[key] = (counter[key] || 0) + 1;
+    })
+
+    var counterArr = Object.entries(counter);
+    console.log(counterArr);
+
+    var arrayLength = counterArr.length;
+    for (var i =0; i < arrayLength; i++) {
+      counterArr[i][0] = JSON.parse(counterArr[i][0]);
     }
 
-    this.selectedItems = Object.keys(selected).map(key => selected[key]);
-    //console.log('items: ', this.selectedItems);
-    this.total = this.selectedItems.reduce((a,b) => a + (b.count * b.price), 0);
+    this.selectedItems = counterArr;
+    this.total = this.cartService.calculateTotal(counterArr);
+    console.log(this.total);
+    console.log(counterArr);
+
   }
 
 }
