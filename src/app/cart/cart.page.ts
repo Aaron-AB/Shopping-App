@@ -24,7 +24,6 @@ export class CartPage implements OnInit {
     })
 
     var counterArr = Object.entries(counter);
-    console.log(counterArr);
 
     var arrayLength = counterArr.length;
     for (var i =0; i < arrayLength; i++) {
@@ -36,6 +35,35 @@ export class CartPage implements OnInit {
     console.log(this.total);
     console.log(counterArr);
 
+  }
+
+  async decreaseCartItem(product) {
+    this.cartService.decreaseProduct(product); 
+  }
+
+
+
+  //new was fixing the decreasecartitem()
+  async calculateTotal() {
+    this.items = this.cartService.getCart();   
+    
+    let counter = {};
+    this.items.forEach(function(obj) {
+      var key = JSON.stringify(obj);
+      counter[key] = (counter[key] || 0) + 1;
+    })
+
+    var counterArr = Object.entries(counter);
+
+    var arrayLength = counterArr.length;
+    for (var i =0; i < arrayLength; i++) {
+      counterArr[i][0] = JSON.parse(counterArr[i][0]);
+    }
+
+    this.selectedItems = counterArr;
+    this.total = this.cartService.calculateTotal(counterArr);
+    console.log(this.total);
+    return this.total;
   }
 
 }

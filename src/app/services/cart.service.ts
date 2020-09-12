@@ -31,7 +31,7 @@ export class CartService {
   private cart = [];
 
 
-  //Made for normal Array
+  //Made for normal Array, displays onto UI the items available for sale
   private cropArray = new Observable<any[]>();
 
   constructor(
@@ -80,6 +80,15 @@ export class CartService {
   addProduct(product) {
     this.cart.push(product);
     //console.log(this.cart);
+  }
+
+  decreaseProduct(product) {
+    for (let [index, p] of this.cart.entries()) {
+      if (p.name === product.name) {
+        this.cart.splice(index, 1);
+        return
+      }
+    }
   }
 
   calculateTotal(items) {

@@ -53,7 +53,7 @@ export class AuthenticationServiceService {
     return this.ngFireAuth.signInWithPopup(provider)
     .then((result) => {
        this.ngZone.run(() => {
-          this.router.navigate(['home']);
+          //this.router.navigate(['home']);
         })
       this.SetUserData(result.user);
     }).catch((error) => {
@@ -69,7 +69,7 @@ export class AuthenticationServiceService {
       email: user.email,
       displayName: user.displayName,
       photoURL: user.photoURL,
-      emailVerified: user.emailVerified
+      emailVerified: user.emailVerified,
     }
     return userRef.set(userData, {
       merge: true

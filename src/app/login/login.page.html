@@ -10,27 +10,69 @@
 <ion-content>
   <form>
     <ion-row>
-      <ion-col> 
-        <ion-button 
-         type="submit" 
-         color="danger"
-         (click)="authService.GoogleAuth()" 
-         expand="block">
-           Login with Google
+      <ion-col>
+        <ion-button
+          type="submit"
+          color="danger"
+          (click)="authService.GoogleAuth()"
+          expand="block"
+        >
+          Login with Google
         </ion-button>
       </ion-col>
     </ion-row>
     <ion-row>
-      <ion-col> 
-        <ion-button 
-         type="submit" 
-         color="danger"
-         (click)="authService.SignOut()" 
-         expand="block">
-           Logout
+      <ion-col>
+        <ion-button
+          type="submit"
+          color="danger"
+          (click)="authService.SignOut()"
+          expand="block"
+        >
+          Logout
         </ion-button>
       </ion-col>
     </ion-row>
-    
+
+    <ion-row>
+      <ion-col>
+        <div id="recaptcha-container" style="display: none"></div>
+
+        <div *ngIf="!otpSent">
+          <ion-note style="font-weight: bold; font-size: medium">
+            Enter the phone number you want to verify with OTP
+          </ion-note>
+          <ion-item>
+            <ion-label position="floating">Phone Number</ion-label>
+            <ion-input id="phoneNumber"></ion-input>
+          </ion-item>
+
+          <ion-button
+            style="float: right; margin-top: 30px"
+            (click)="sendOTP()"
+          >
+            Send OTP
+          </ion-button>
+        </div>
+
+        <div *ngIf="otpSent">
+          <ion-note style="font-weight: bold; font-size: medium">
+            Enter the OTP sent to the {{phoneNumber}}
+          </ion-note>
+
+          <ion-item>
+            <ion-label position="floating"> Verify OTP</ion-label>
+            <ion-input id="otp"></ion-input>
+          </ion-item>
+
+          <ion-button
+            style="float: right; margin-top: 30px"
+            (click)="verifyOTP()"
+          >
+            Verify OTP
+          </ion-button>
+        </div>
+      </ion-col>
+    </ion-row>
   </form>
 </ion-content>
