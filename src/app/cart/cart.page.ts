@@ -7,8 +7,9 @@ import { CartService } from '../services/cart.service';
   styleUrls: ['./cart.page.scss'],
 })
 export class CartPage implements OnInit {
-
+  
   selectedItems = [];
+  //items from cart
   items = [];
   total = 0;
   constructor(private cartService: CartService) { }
@@ -16,7 +17,12 @@ export class CartPage implements OnInit {
   ngOnInit() {
 
     this.items = this.cartService.getCart();   
-    
+    console.log(this.items);
+    console.log("CART ^");
+
+
+    /*
+    //count the number of each item there are
     let counter = {};
     this.items.forEach(function(obj) {
       var key = JSON.stringify(obj);
@@ -25,6 +31,7 @@ export class CartPage implements OnInit {
 
     var counterArr = Object.entries(counter);
 
+    //convert the json file to an array
     var arrayLength = counterArr.length;
     for (var i =0; i < arrayLength; i++) {
       counterArr[i][0] = JSON.parse(counterArr[i][0]);
@@ -34,13 +41,25 @@ export class CartPage implements OnInit {
     this.total = this.cartService.calculateTotal(counterArr);
     console.log(this.total);
     console.log(counterArr);
+    */
 
   }
 
-  async decreaseCartItem(product) {
-    this.cartService.decreaseProduct(product); 
+  decreaseCartItem(product) {
+    this.cartService.decreaseProduct(product);
   }
 
+  increaseCartItem(product) {
+    this.cartService.addProduct(product);
+  }
+
+  removeCartItem(product) {
+    this.cartService.removeProduct(product);
+  }
+
+  getTotal() { 
+    return this.items.reduce((i, j) => i + j.Price * j.Amount, 0);
+  }
 
 
   //new was fixing the decreasecartitem()

@@ -15,6 +15,8 @@ export class HomePage implements OnInit{
   cart = []; 
   items = [];//Stores the crops
 
+  cartItemCount = this.cartService.cartItemCount;
+
   sliderConfig = {
     spaceBetween: 10,
     centeredSlides: true,
@@ -35,16 +37,21 @@ export class HomePage implements OnInit{
     this.cartService.getProductsArr().subscribe(res => {
       this.cropArr = res;
       this.items = this.cropArr[0].data.Data;
-      //console.log(this.items);
+      console.log(this.items);
     })
 
     this.cart = this.cartService.getCart();
     //console.log(this.cart);
   }
 
-  async addToCart(product) {
+  addToCart(product) {
     //this.cart.push(product);
     this.cartService.addProduct(product);
+    console.log(product);
+  }
+
+  async removeFromCart(product) {
+    this.cartService.decreaseProduct(product);
     console.log(product);
   }
 

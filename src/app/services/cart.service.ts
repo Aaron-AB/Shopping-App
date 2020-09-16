@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
 import { FirebaseService } from './firebase.service';
 import { map, take } from 'rxjs/operators';
 import { AngularFirestoreCollection, AngularFirestore } from '@angular/fire/firestore';
@@ -30,6 +30,8 @@ export class CartService {
   cropList: CropData[];
   private cart = [];
 
+  cartItemCount: BehaviorSubject<number>;
+
 
   //Made for normal Array, displays onto UI the items available for sale
   private cropArray = new Observable<any[]>();
@@ -38,24 +40,6 @@ export class CartService {
     private firebaseService: FirebaseService,
     private afs: AngularFirestore
   ) {
-    //WORKS WELL WITH SIMPLE INTERFACE
-    /*
-    this.cropCollection = this.afs.collection<CropData>('cropdata');
-    this.cropdata = this.firebaseService.read_items().pipe(
-      map(actions => {
-        return actions.map(a => {
-                    
-          return { 
-            id: a.payload.doc.id,
-            isEdit: false,
-            Category: a.payload.doc.data()['Category'],
-            Name: a.payload.doc.data()['Crop'],
-            Price: a.payload.doc.data()['Price'],
-            Unit: a.payload.doc.data()['Unit'],
-            Image: a.payload.doc.data()['Image'] };
-        })
-      })
-    );*/
 
     this.cropArray = this.firebaseService.read_items().pipe(
       map(actions => {
@@ -67,6 +51,8 @@ export class CartService {
         })
       })
     )
+
+    console.log(this.cropArray);
   }
 
   getProductsArr() {
@@ -78,15 +64,37 @@ export class CartService {
   }
 
   addProduct(product) {
-    this.cart.push(product);
-    //console.log(this.cart);
+    let added = false;
+    for (let p of this.cart) {
+      if (p.Name === product.Name) {
+        p.Amount += 1;
+        added = true;
+        break;
+      }
+    }
+    if (!added) {
+      this.cart.push(product);
+    }
+    //this.cartItemCount.next(this.cartItemCount.value + 1);
   }
 
   decreaseProduct(product) {
     for (let [index, p] of this.cart.entries()) {
-      if (p.name === product.name) {
+      if (p.Name === product.Name) {
+        p.Amount -= 1;
+        if (p.Amount === 0) {
+          this.cart.splice(index, 1);
+        }
+      }
+    }
+    //this.cartItemCount.next(this.cartItemCount.value - 1);
+  }
+
+  removeProduct(product) {
+    for (let [index, p] of this.cart.entries()) {
+      if (p.Name == product.Name) {
+        //this.cartItemCount.next(this.cartItemCount.value - p.amount);
         this.cart.splice(index, 1);
-        return
       }
     }
   }

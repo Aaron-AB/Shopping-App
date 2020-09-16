@@ -11,11 +11,45 @@
 
 <ion-content>
   <ion-list>
-    <ion-item *ngFor="let item of selectedItems" lines="inset">
-      {{ item[1] }} x {{ item[0].Name }} - {{ item[0].Price | currency:'TTD':'symbol' }}
+    <ion-item *ngFor="let item of items" lines="inset">
+      <ion-grid>
+        <ion-row class="ion-align-items-center">
+          <ion-col size="2" class="ion-align-self-center">
+            <ion-button color="medium" fill="clear" (click)="decreaseCartItem(item)">
+              <ion-icon name="remove-circle" slot="icon-only"></ion-icon>
+            </ion-button>
+          </ion-col>
+
+          <ion-col size="1" class="ion-align-self-center">
+            {{ item.Amount }}
+          </ion-col>
+
+          <ion-col size="2" class="ion-align-self-center">
+            <ion-button color="medium" fill="clear" (click)="increaseCartItem(item)">
+              <ion-icon name="add-circle" slot="icon-only"></ion-icon>
+            </ion-button>
+          </ion-col>
+
+          <ion-col size="2" class="ion-align-self-center">
+            <ion-button color="medium" fill="clear" (click)="removeCartItem(item)">
+              <ion-icon name="close-circle" slot="icon-only"></ion-icon>
+            </ion-button>
+          </ion-col>
+          
+        </ion-row>
+
+        <ion-row>
+          <ion-col size="9">
+            <b>{{ item.Name }}</b>
+          </ion-col>
+          <ion-col size="3" class="ion-text-end">
+            {{ item.Amount * item.Price | currency:'USD' }}
+          </ion-col>
+        </ion-row>
+      </ion-grid>
     </ion-item>
     <ion-item>
-      Total: <span slot="end"> {{ total | currency:'TTD':'symbol'}} </span>
+      Total: <span slot="end"> {{ getTotal() | currency:'TTD':'symbol'}} </span>
     </ion-item>
   </ion-list>
 </ion-content>
