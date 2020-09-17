@@ -36,8 +36,11 @@ export class HomePage implements OnInit{
 
     this.cartService.getProductsArr().subscribe(res => {
       this.cropArr = res;
+      console.log(this.cropArr);
       this.items = this.cropArr[0].data.Data;
+
       console.log(this.items);
+      console.log(JSON.stringify(this.items));
     })
 
     this.cart = this.cartService.getCart();

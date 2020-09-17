@@ -5,14 +5,14 @@
 export const environment = {
   production: false,
   firebase: {
-    apiKey: "AIzaSyAmu_la9VGgWT9F7MZxsOyHoZk_E1J_4jA",
-    authDomain: "v-elect-96278.firebaseapp.com",
-    databaseURL: "https://v-elect-96278.firebaseio.com",
-    projectId: "v-elect-96278",
-    storageBucket: "v-elect-96278.appspot.com",
-    messagingSenderId: "225301091873",
-    appId: "1:225301091873:web:1656b89b6e300ed8747560",
-    measurementId: "G-36LE4W0T9H"
+    apiKey: "AIzaSyAoP6Y7vL1-86E5VKsmdnpgtxraJBcBBTY",
+    authDomain: "grocer-d76ea.firebaseapp.com",
+    databaseURL: "https://grocer-d76ea.firebaseio.com",
+    projectId: "grocer-d76ea",
+    storageBucket: "grocer-d76ea.appspot.com",
+    messagingSenderId: "227233482603",
+    appId: "1:227233482603:web:e276eaf0f0546648cc2e2e",
+    measurementId: "G-JJNVX1GPNY"
   }
 };
 

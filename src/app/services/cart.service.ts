@@ -40,8 +40,8 @@ export class CartService {
     private firebaseService: FirebaseService,
     private afs: AngularFirestore
   ) {
-
-    this.cropArray = this.firebaseService.read_items().pipe(
+    //change back to read_items()
+    this.cropArray = this.firebaseService.get_recent().pipe(
       map(actions => {
         return actions.map(a => {
           return {

@@ -15,20 +15,20 @@
 <ion-content [fullscreen]="true">
   <div *ngFor="let cat of items" class="category-block">
     <ion-row no-padding class="category-banner">
-      <ion-col text-left button tappable (click)="cat.expanded = !cat.expanded" align-self-center>
+      <ion-col text-left align-self-center>
         {{ cat.Category }}
       </ion-col>
     </ion-row>
 
     <ion-slides [options]="sliderConfig">
       <ion-slide *ngFor="let product of cat.Products">
-        <div *ngIf="cat.expanded">
+        <div>
           <ion-card>
             <ion-card-title>
               {{ product.Name }} - ${{ product.Price }}
             </ion-card-title>
             <ion-card-content>
-              <img src="https://via.placeholder.com/300x300">
+              <img src={{product.Image}} height='400' width='300'>
               <ion-button expand="full" (click)="addToCart(product)">
                 Add to Cart
               </ion-button>

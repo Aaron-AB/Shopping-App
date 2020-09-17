@@ -8,7 +8,7 @@ import { CropData } from '../services/cart.service';
 })
 export class FirebaseService {
 
-  collectionName = 'Farm';
+  collectionName = 'farm';
 
   constructor(
     private firestore: AngularFirestore
@@ -28,5 +28,9 @@ export class FirebaseService {
 
   delete_student(record_id) {
     this.firestore.doc(this.collectionName + '/' + record_id).delete();
+  }
+
+  get_recent() {
+    return this.firestore.collection<any>(this.collectionName, ref => ref.orderBy('Date', 'desc')).snapshotChanges();
   }
 }
