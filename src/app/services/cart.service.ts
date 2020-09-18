@@ -106,4 +106,7 @@ export class CartService {
     }
     return total;
   }
+  clearcart(){
+    this.cart = []; 
+     }
 }
