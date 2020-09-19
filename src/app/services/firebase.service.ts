@@ -14,10 +14,9 @@ export class FirebaseService {
     private firestore: AngularFirestore
   ) { }
 
-  create_student(record) {
-    return this.firestore.collection<any>(this.collectionName).add(record);
+  create_student(record,collectionName) {
+    return this.firestore.collection<any>(collectionName).add(record);
   }
-
   read_items() {
     return this.firestore.collection<any>(this.collectionName).snapshotChanges();
   }

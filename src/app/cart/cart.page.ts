@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CartService } from '../services/cart.service';
+import { AngularFireAuth } from "@angular/fire/auth";
+import { FirebaseService } from '../services/firebase.service';
 
 @Component({
   selector: 'app-cart',
@@ -12,7 +14,7 @@ export class CartPage implements OnInit {
   //items from cart
   items = [];
   total = 0;
-  constructor(private cartService: CartService) { }
+  constructor(private cartService: CartService,private af:AngularFireAuth,private firebaseService: FirebaseService  ) { }
 
   ngOnInit() {
 
@@ -84,5 +86,27 @@ export class CartPage implements OnInit {
     console.log(this.total);
     return this.total;
   }
+  clear(){
+    this.cartService.clearcart();
+    this.items = [];
+    this.total = 0;
+  }
+
+  async senddata(){
+    let user = await this.af.currentUser
+
+    var data= {
+     user: user.displayName,
+     userid:user.uid,
+     useremail:user.email,
+     items : this.items,
+     date: Date.now(),
+     amount: this.total,
+    }
+    console.log(data);
+    this.firebaseService.create_student(data,"order");
+    this.clear();
+  }
+
 
 }
