@@ -1,5 +1,7 @@
 {
   "name": "Grocer",
-  "integrations": {},
+  "integrations": {
+    "capacitor": {}
+  },
   "type": "angular"
 }
