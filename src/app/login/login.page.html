@@ -3,12 +3,13 @@
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
-    <ion-title>Sign in</ion-title>
+    <ion-title style="font-weight: bold; font-size: medium">Enter your phone number</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <form>
+    <!--
     <ion-row>
       <ion-col>
         <ion-button
@@ -33,46 +34,61 @@
         </ion-button>
       </ion-col>
     </ion-row>
-
+    -->
+    <ion-grid>
     <ion-row>
       <ion-col>
         <div id="recaptcha-container" style="display: none"></div>
 
         <div *ngIf="!otpSent">
-          <ion-note style="font-weight: bold; font-size: medium">
-            Enter the phone number you want to verify with OTP
-          </ion-note>
-          <ion-item>
-            <ion-label position="floating">Phone Number</ion-label>
-            <ion-input id="phoneNumber"></ion-input>
-          </ion-item>
-
-          <ion-button
-            style="float: right; margin-top: 30px"
-            (click)="sendOTP()"
-          >
-            Send OTP
-          </ion-button>
+          <ion-row>
+            <ion-col size="3"></ion-col>
+            <ion-col size="6"></ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col class="area-code" size="3">
+              <ion-label>
+                +1868
+              </ion-label>
+            </ion-col>
+            <ion-col style="text-align: left">
+              <ion-item>
+                <ion-label class="ion-text-start" position="floating">Phone Number</ion-label>
+                <ion-input id="phoneNumber"></ion-input>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col size="3"></ion-col>
+            <ion-col>
+              <ion-button (click)="sendOTP()">
+                Send OTP
+              </ion-button>
+            </ion-col>
+          </ion-row>
         </div>
 
         <div *ngIf="otpSent">
           <ion-note style="font-weight: bold; font-size: medium">
-            Enter the OTP sent to the {{phoneNumber}}
+            Code sent to {{phoneNumber}}
           </ion-note>
 
           <ion-item>
             <ion-label position="floating"> Verify OTP</ion-label>
             <ion-input id="otp"></ion-input>
           </ion-item>
-
+          <ion-row>
+          <ion-col style="text-align:center">
           <ion-button
-            style="float: right; margin-top: 30px"
             (click)="verifyOTP()"
           >
             Verify OTP
           </ion-button>
+        </ion-col>
+        </ion-row>
         </div>
       </ion-col>
     </ion-row>
+  </ion-grid>
   </form>
 </ion-content>
