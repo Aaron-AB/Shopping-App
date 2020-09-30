@@ -4,6 +4,7 @@ import { User } from "../shared/user";
 import { Router } from "@angular/router";
 import { AngularFireAuth } from "@angular/fire/auth";
 import { auth } from 'firebase/app';
+import * as firebase from 'firebase';
 
 @Injectable({
   providedIn: 'root'
@@ -83,5 +84,14 @@ export class AuthenticationServiceService {
       localStorage.removeItem('user');
       this.router.navigate(['login']);
     })
+  }
+
+  checkLogin() {
+    if(firebase.auth().currentUser) {
+      return true;
+    }
+    else {
+      return false;
+    }
   }
 }
