@@ -31,7 +31,7 @@
 }
 
 .category-banner { 
-  border-left : 8px solid var(--ion-color-secondary);
+  border-left : 8px solid green;
   background: var(--ion-color-light);
   height: 40px;
   padding: 10px;
@@ -47,4 +47,14 @@ img{
 height : 100px;
 width: 200;
 
+  }
+  .new-background-color{
+    --background: green;
+  }
+  .btns{
+    --background: green;
+  }
+  .title-bar{
+    
+    --background: green;
   }
