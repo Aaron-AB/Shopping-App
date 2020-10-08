@@ -14,4 +14,5 @@ export class LocationService {
     this.coords = coordinates.coords;
     console.log(this.coords);
   }
+  
 }
