@@ -3,7 +3,7 @@ import { CartService } from '../services/cart.service';
 import { AngularFireAuth } from "@angular/fire/auth";
 import { FirebaseService } from '../services/firebase.service';
 import { redirectLoggedInTo } from '@angular/fire/auth-guard';
-
+import { ModalController } from '@ionic/angular';
 @Component({
   selector: 'app-cart',
   templateUrl: './cart.page.html',
@@ -15,7 +15,7 @@ export class CartPage implements OnInit {
   //items from cart
   items = [];
   total = 0;
-  constructor(private cartService: CartService,private af:AngularFireAuth,private firebaseService: FirebaseService  ) { }
+  constructor(private cartService: CartService,private af:AngularFireAuth,private firebaseService: FirebaseService,public modalController: ModalController ) { }
 
   ngOnInit() {
 
@@ -115,6 +115,17 @@ export class CartPage implements OnInit {
     this.firebaseService.create_student(data,"order");
     this.clear();
   }
-
-
+/*
+  async presentModal() {
+    const modal = await this.modalController.create({
+      component: ModalPageComponent,
+      cssClass: 'my-custom-class',
+      componentProps: {
+        'firstName': 'Douglas',
+        'lastName': 'Adams',
+        'middleInitial': 'N'
+      }
+    });
+    return await modal.present();
+  }*/
 }
