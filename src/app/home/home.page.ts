@@ -20,7 +20,8 @@ export class HomePage implements OnInit{
   sliderConfig = {
     spaceBetween: 10,
     centeredSlides: true,
-    slidesPerView: 1.6
+    slidesPerView: 1.6,
+    speed: 400
   }
   constructor(private cartService: CartService, private router: Router) {
 

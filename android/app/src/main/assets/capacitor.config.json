@@ -1,6 +1,6 @@
 {
-  "appId": "com.parsley.app",
-  "appName": "Parsley",
+  "appId": "com.grocer.app",
+  "appName": "Grocer",
   "bundledWebRuntime": false,
   "npmClient": "npm",
   "webDir": "www",
