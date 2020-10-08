@@ -4,6 +4,7 @@ import { AngularFireAuth } from "@angular/fire/auth";
 import { FirebaseService } from '../services/firebase.service';
 import { redirectLoggedInTo } from '@angular/fire/auth-guard';
 import { ModalController } from '@ionic/angular';
+import { CheckoutmodalPage } from '../checkoutmodal/checkoutmodal.page';
 @Component({
   selector: 'app-cart',
   templateUrl: './cart.page.html',
@@ -115,10 +116,10 @@ export class CartPage implements OnInit {
     this.firebaseService.create_student(data,"order");
     this.clear();
   }
-/*
+
   async presentModal() {
     const modal = await this.modalController.create({
-      component: ModalPageComponent,
+      component: CheckoutmodalPage ,
       cssClass: 'my-custom-class',
       componentProps: {
         'firstName': 'Douglas',
@@ -127,5 +128,5 @@ export class CartPage implements OnInit {
       }
     });
     return await modal.present();
-  }*/
+  }
 }
