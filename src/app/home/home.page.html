@@ -28,7 +28,7 @@
               {{ product.Name }} - ${{ product.Price }}
             </ion-card-title>
             <ion-card-content>
-              <img src={{product.Image}} height='400' width='300'>
+              <ion-img [src]="product?.Image" height='400' width='300'></ion-img>
               <ion-button class="btns" expand="full" (click)="addToCart(product)">
                 Add to Cart
               </ion-button>
