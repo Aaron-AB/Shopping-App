@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { FirebaseService } from './firebase.service';
-import { map, take } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { AngularFirestoreCollection, AngularFirestore } from '@angular/fire/firestore';
-//import { map } from 'rxjs/operators';
 
 
 export interface CropData {
