@@ -2,9 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { CartService } from '../services/cart.service';
 import { AngularFireAuth } from "@angular/fire/auth";
 import { FirebaseService } from '../services/firebase.service';
+<<<<<<< HEAD
 import { redirectLoggedInTo } from '@angular/fire/auth-guard';
 import { ModalController } from '@ionic/angular';
 import { CheckoutmodalPage } from '../checkoutmodal/checkoutmodal.page';
+=======
+
+>>>>>>> d86ccf2f1316e6102146de93c65e1c2ee8bc8d59
 @Component({
   selector: 'app-cart',
   templateUrl: './cart.page.html',
@@ -16,36 +20,13 @@ export class CartPage implements OnInit {
   //items from cart
   items = [];
   total = 0;
-  constructor(private cartService: CartService,private af:AngularFireAuth,private firebaseService: FirebaseService,public modalController: ModalController ) { }
+  constructor(private cartService: CartService,private af:AngularFireAuth,private firebaseService: FirebaseService) { }
 
   ngOnInit() {
 
     this.items = this.cartService.getCart();   
     console.log(this.items);
     console.log("CART ^");
-
-
-    /*
-    //count the number of each item there are
-    let counter = {};
-    this.items.forEach(function(obj) {
-      var key = JSON.stringify(obj);
-      counter[key] = (counter[key] || 0) + 1;
-    })
-
-    var counterArr = Object.entries(counter);
-
-    //convert the json file to an array
-    var arrayLength = counterArr.length;
-    for (var i =0; i < arrayLength; i++) {
-      counterArr[i][0] = JSON.parse(counterArr[i][0]);
-    }
-
-    this.selectedItems = counterArr;
-    this.total = this.cartService.calculateTotal(counterArr);
-    console.log(this.total);
-    console.log(counterArr);
-    */
 
   }
 
@@ -64,31 +45,6 @@ export class CartPage implements OnInit {
   getTotal() { 
     return this.items.reduce((i, j) => i + j.Price * j.Amount, 0);
   }
-
-
-  //new was fixing the decreasecartitem()
-  async calculateTotal() {
-    this.items = this.cartService.getCart();   
-    
-    let counter = {};
-    this.items.forEach(function(obj) {
-      var key = JSON.stringify(obj);
-      counter[key] = (counter[key] || 0) + 1;
-    })
-
-    var counterArr = Object.entries(counter);
-
-    var arrayLength = counterArr.length;
-    for (var i =0; i < arrayLength; i++) {
-      counterArr[i][0] = JSON.parse(counterArr[i][0]);
-    }
-
-    this.selectedItems = counterArr;
-    this.total = this.cartService.calculateTotal(counterArr);
-    console.log(this.total);
-    return this.total;
-  }
-
 
   clear(){
     this.cartService.clearcart();
@@ -116,6 +72,7 @@ export class CartPage implements OnInit {
     this.firebaseService.create_student(data,"order");
     this.clear();
   }
+<<<<<<< HEAD
 
   async presentModal() {
     const modal = await this.modalController.create({
@@ -129,4 +86,6 @@ export class CartPage implements OnInit {
     });
     return await modal.present();
   }
+=======
+>>>>>>> d86ccf2f1316e6102146de93c65e1c2ee8bc8d59
 }

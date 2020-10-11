@@ -23,6 +23,7 @@ const routes: Routes = [
     path: 'login',
     loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
   },
+<<<<<<< HEAD
   {
     path: 'search',
     loadChildren: () => import('./search/search.module').then( m => m.SearchPageModule)
@@ -32,6 +33,8 @@ const routes: Routes = [
     loadChildren: () => import('./checkoutmodal/checkoutmodal.module').then( m => m.CheckoutmodalPageModule)
   },
 
+=======
+>>>>>>> d86ccf2f1316e6102146de93c65e1c2ee8bc8d59
 ];
 
 @NgModule({

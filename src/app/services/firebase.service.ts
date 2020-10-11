@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 
-import { CropData } from '../services/cart.service';
-
 @Injectable({
   providedIn: 'root'
 })
