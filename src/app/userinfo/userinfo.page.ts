@@ -12,4 +12,10 @@ export class UserinfoPage implements OnInit {
   ngOnInit() {
   }
 
+
+  register(form) {
+    form.value.subscribe((res) => {
+      console.log(res);
+    })
+  }
 }
