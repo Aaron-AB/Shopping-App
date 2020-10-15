@@ -14,8 +14,10 @@ export class UserinfoPage implements OnInit {
 
 
   register(form) {
+    /*
     form.value.subscribe((res) => {
       console.log(res);
-    })
+    })*/
+    console.log(form);
   }
 }
