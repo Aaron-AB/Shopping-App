@@ -46,6 +46,7 @@ export class CartPage implements OnInit {
     this.total = 0;
   }
 
+  /*
   async senddata(){
     let user = await this.af.currentUser;
 
@@ -65,5 +66,38 @@ export class CartPage implements OnInit {
     console.log(data);
     this.firebaseService.create_student(data,"order");
     this.clear();
+  }*/
+
+  async sendData(){
+    let user = await this.af.currentUser;
+    let total = this.getTotal();
+    let items = this.createItemList();
+
+    if(!user){
+      return;
+    }
+
+    let userId = user.uid;
+
+    var data = {
+      userid: userId,
+      items : items,
+      amount: total
+    }
+
+    let userData = {}
+    userData[userId] = data;
+
+    console.log(userData);
+    this.firebaseService.append_item(Date.now(), "orders", userData);
+  }
+
+  createItemList() {
+    let newItemList = [];
+    for(var item of this.items) {
+      newItemList.push({"name": item.Name, "amount": item.Amount, "price": item.Price})
+    }
+    return newItemList;
   }
 }
+
