@@ -47,7 +47,7 @@ export class CartPage implements OnInit {
   }
 
   async senddata(){
-    let user = await this.af.currentUser
+    let user = await this.af.currentUser;
 
     if(!user) {
     }
