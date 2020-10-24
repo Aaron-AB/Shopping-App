@@ -85,11 +85,14 @@ export class CartPage implements OnInit {
       amount: total
     }
 
+    let recDate = new Date();
+    recDate.setHours(0, 0, 0, 0);
+
     let userData = {}
     userData[userId] = data;
 
     console.log(userData);
-    this.firebaseService.append_item(Date.now(), "orders", userData);
+    this.firebaseService.append_item(recDate, "orders", userData);
   }
 
   createItemList() {
