@@ -46,28 +46,6 @@ export class CartPage implements OnInit {
     this.total = 0;
   }
 
-  /*
-  async senddata(){
-    let user = await this.af.currentUser;
-
-    if(!user) {
-    }
-
-
-    var data= {
-      user: user.displayName,
-      userid:user.uid,
-      useremail:user.email,
-      items : this.items,
-      date: Date.now(),
-      amount: this.total,
-    }
-
-    console.log(data);
-    this.firebaseService.create_student(data,"order");
-    this.clear();
-  }*/
-
   async sendData(){
     let user = await this.af.currentUser;
     let total = this.getTotal();

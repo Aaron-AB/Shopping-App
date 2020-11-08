@@ -31,6 +31,10 @@ export class FirebaseService {
     this.firestore.doc(collectionName + '/' + recordID).set(newObj);
   }
 
+  append_array(recordID) {
+    this.firestore.collection("Users" + '/' + recordID).doc("Friends")
+  }
+
   get_recent() {
     return this.firestore.collection<any>(this.collectionName, ref => ref.orderBy('Date', 'desc')).snapshotChanges();
   }
