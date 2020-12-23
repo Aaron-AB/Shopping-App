@@ -19,12 +19,20 @@ export class FirebaseService {
     return this.firestore.collection<any>(this.collectionName).snapshotChanges();
   }
 
-  update_student(recordID, record) {
+  update_item(recordID, record) {
     this.firestore.doc(this.collectionName + '/' + recordID).update(record);
   }
 
   delete_student(record_id) {
     this.firestore.doc(this.collectionName + '/' + record_id).delete();
+  }
+
+  append_item(recordID, collectionName, newObj) {
+    this.firestore.doc(collectionName + '/' + recordID).set(newObj);
+  }
+
+  append_array(recordID) {
+    this.firestore.collection("Users" + '/' + recordID).doc("Friends")
   }
 
   get_recent() {

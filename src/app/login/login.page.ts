@@ -40,16 +40,6 @@ export class LoginPage implements OnInit {
     pNumber = areaCode + pNumber;
     console.log(pNumber);
     this.pNumber = pNumber;
-    /*
-    this.af.currentUser.then(u => u.linkWithPhoneNumber(this.pNumber, this.recaptchaVerifier)).then((result) => {
-      this.otpSent = true;
-      this.phoneNumber = pNumber;
-      this.confirmationResult = result;
-      alert("OTP Sent!");
-    }).catch(err => {
-      alert(err);
-    })
-    */
     this.af.signInWithPhoneNumber(this.pNumber, this.recaptchaVerifier).then((result) => {
     this.otpSent = true;
     this.phoneNumber = pNumber;

@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CartService, CropData } from '../services/cart.service';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -28,12 +27,6 @@ export class HomePage implements OnInit{
   }
 
   ngOnInit() {
-    //WORKS WELL
-    /*
-    this.cartService.getProducts().subscribe(res => {
-      this.cropList = res;
-      console.log(this.cropList);
-    })*/
 
     this.cartService.getProductsArr().subscribe(res => {
       this.cropArr = res;
@@ -45,11 +38,9 @@ export class HomePage implements OnInit{
     })
 
     this.cart = this.cartService.getCart();
-    //console.log(this.cart);
   }
 
   addToCart(product) {
-    //this.cart.push(product);
     this.cartService.addProduct(product);
     console.log(product);
   }

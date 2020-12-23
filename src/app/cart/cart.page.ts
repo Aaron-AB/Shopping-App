@@ -53,25 +53,39 @@ export class CartPage implements OnInit {
     this.total = 0;
   }
 
-  async senddata(){
-    let user = await this.af.currentUser
+  async sendData(){
+    let user = await this.af.currentUser;
+    let total = this.getTotal();
+    let items = this.createItemList();
 
-    if(!user) {
+    if(!user){
+      return;
     }
 
+    let userId = user.uid;
 
-    var data= {
-      user: user.displayName,
-      userid:user.uid,
-      useremail:user.email,
-      items : this.items,
-      date: Date.now(),
-      amount: this.total,
+    var data = {
+      userid: userId,
+      items : items,
+      amount: total
     }
 
-    console.log(data);
-    this.firebaseService.create_student(data,"order");
-    this.clear();
+    let recDate = new Date();
+    recDate.setHours(0, 0, 0, 0);
+
+    let userData = {}
+    userData[userId] = data;
+
+    console.log(userData);
+    this.firebaseService.append_item(recDate, "orders", userData);
+  }
+
+  createItemList() {
+    let newItemList = [];
+    for(var item of this.items) {
+      newItemList.push({"name": item.Name, "amount": item.Amount, "price": item.Price})
+    }
+    return newItemList;
   }
 /*
   async presentModal() {
@@ -102,3 +116,4 @@ export class CartPage implements OnInit {
 
 
 }
+
