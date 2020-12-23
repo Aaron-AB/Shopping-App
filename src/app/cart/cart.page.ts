@@ -4,7 +4,7 @@ import { AngularFireAuth } from "@angular/fire/auth";
 import { FirebaseService } from '../services/firebase.service';
 import { redirectLoggedInTo } from '@angular/fire/auth-guard';
 import { ModalController } from '@ionic/angular';
-import { CheckoutmodalPage } from '../checkoutmodal/checkoutmodal.page';
+
 
 
 declare var paypal;
@@ -131,20 +131,6 @@ paypal
     });
     return await modal.present();
   }*/
-  private createOrder(data, actions) {
-    return actions.order.create({
-        purchase_units: [{
-            amount: {
-                value: '0.01'
-            }
-        }]
-    });
-  }
-
-  private onApprove(data, actions) {
-    return actions.order.capture();
-  }
-
 
 }
 
