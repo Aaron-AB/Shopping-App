@@ -33,6 +33,7 @@ export class CartPage implements OnInit {
     this.items = this.cartService.getCart();   
     console.log(this.items);
     console.log("CART ^");
+    var total = this.items.reduce((i, j) => i + j.Price * j.Amount, 0);
 //top
 paypal
 .Buttons({
@@ -43,7 +44,7 @@ paypal
           description: this.product1.description,
           amount: {
             currency_code: 'USD',
-            value: 3.00,
+            value: total,
           }
         }
       ]
