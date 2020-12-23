@@ -12,7 +12,8 @@ dependencies {
 
 
 }
-
+apply from: "../../node_modules/card.io.cordova.mobilesdk/src/android/build.gradle"
+apply from: "../../node_modules/com.paypal.cordova.mobilesdk/src/android/build.gradle"
 
 if (hasProperty('postBuildExtras')) {
   postBuildExtras()

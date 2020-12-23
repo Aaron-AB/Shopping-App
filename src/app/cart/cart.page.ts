@@ -2,13 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { CartService } from '../services/cart.service';
 import { AngularFireAuth } from "@angular/fire/auth";
 import { FirebaseService } from '../services/firebase.service';
-<<<<<<< HEAD
 import { redirectLoggedInTo } from '@angular/fire/auth-guard';
 import { ModalController } from '@ionic/angular';
 import { CheckoutmodalPage } from '../checkoutmodal/checkoutmodal.page';
-=======
-
->>>>>>> d86ccf2f1316e6102146de93c65e1c2ee8bc8d59
 @Component({
   selector: 'app-cart',
   templateUrl: './cart.page.html',
@@ -16,13 +12,18 @@ import { CheckoutmodalPage } from '../checkoutmodal/checkoutmodal.page';
 })
 export class CartPage implements OnInit {
   
+  
   selectedItems = [];
   //items from cart
   items = [];
   total = 0;
   constructor(private cartService: CartService,private af:AngularFireAuth,private firebaseService: FirebaseService) { }
+ 
 
+
+  
   ngOnInit() {
+
 
     this.items = this.cartService.getCart();   
     console.log(this.items);
@@ -72,10 +73,9 @@ export class CartPage implements OnInit {
     this.firebaseService.create_student(data,"order");
     this.clear();
   }
-<<<<<<< HEAD
-
+/*
   async presentModal() {
-    const modal = await this.modalController.create({
+    const modal = await this.ModalController.create({
       component: CheckoutmodalPage ,
       cssClass: 'my-custom-class',
       componentProps: {
@@ -85,7 +85,20 @@ export class CartPage implements OnInit {
       }
     });
     return await modal.present();
+  }*/
+  private createOrder(data, actions) {
+    return actions.order.create({
+        purchase_units: [{
+            amount: {
+                value: '0.01'
+            }
+        }]
+    });
   }
-=======
->>>>>>> d86ccf2f1316e6102146de93c65e1c2ee8bc8d59
+
+  private onApprove(data, actions) {
+    return actions.order.capture();
+  }
+
+
 }
