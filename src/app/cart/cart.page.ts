@@ -1,18 +1,25 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { CartService } from '../services/cart.service';
 import { AngularFireAuth } from "@angular/fire/auth";
 import { FirebaseService } from '../services/firebase.service';
 import { redirectLoggedInTo } from '@angular/fire/auth-guard';
 import { ModalController } from '@ionic/angular';
 import { CheckoutmodalPage } from '../checkoutmodal/checkoutmodal.page';
+
+
+declare var paypal;
 @Component({
   selector: 'app-cart',
   templateUrl: './cart.page.html',
   styleUrls: ['./cart.page.scss'],
 })
 export class CartPage implements OnInit {
-  
-  
+  @ViewChild('paypal',{static: true}) paypalElement: ElementRef;
+  paidFor = false;
+  product1 ={
+    price: 2.00,
+    description: 'this is the total cost of all the items bought'
+  }
   selectedItems = [];
   //items from cart
   items = [];
@@ -23,11 +30,35 @@ export class CartPage implements OnInit {
 
   
   ngOnInit() {
-
-
     this.items = this.cartService.getCart();   
     console.log(this.items);
     console.log("CART ^");
+//top
+paypal
+.Buttons({
+  createOrder: (data, actions) => {
+    return actions.order.create({
+      purchase_units: [
+        {
+          description: this.product1.description,
+          amount: {
+            currency_code: 'USD',
+            value: 3.00,
+          }
+        }
+      ]
+    });
+  }, onApprove: async (data, actions) => {
+    const order = await actions.order.capture();
+    this.paidFor = true;
+    console.log(order);
+  },
+  onError: err => {
+    console.log(err);
+  }
+})
+.render(this.paypalElement.nativeElement);
+    //bottom
 
   }
 
